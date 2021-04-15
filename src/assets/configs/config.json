@@ -1,0 +1,21 @@
+{
+  "menu": {
+    "event": {
+      "id": "序号",
+      "pic": "PIC",
+      "administrator": "主管",
+      "event": "未结案事件数",
+      "cumulative": "累计持续时间"
+    },
+    "level": {
+      "occurrence": "发生时间",
+      "duration": "持续时间",
+      "situation": "地点",
+      "system": "系统名称",
+      "group": "群组",
+      "content": "内容",
+      "status": "状态",
+      "level": "Level"
+    }
+  }
+}

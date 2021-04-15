@@ -1,0 +1,110 @@
+<app-header></app-header>
+<div class="content">
+
+  <div class="left">
+
+    <div class="top">
+      <div class="box-left">
+        <div style="text-align: center;margin-top: -5px;">
+          <span class="redN">54</span>
+          <span class="redT">個</span>
+        </div>
+
+        <p>未结案事件总数</p>
+
+      </div>
+      <div class="box-right">
+        <div style="text-align: center;  margin-top: -5px;">
+          <span class="blueN">45</span>
+          <span class="blueT">H</span>
+        </div>
+        <p>累计持续时间</p>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <table>
+        <thead>
+          <tr *ngFor="let item of eventObj">
+            <th width=20px style="border-radius: 6px 0 0 0;">{{item.id}}</th>
+            <th width=20px>{{item.pic}}</th>
+            <th width=20px>{{item.administrator}}</th>
+            <th width=40px>{{item.event}}<img src="assets/images/on.png" (click)="exchangelogo()" alt=""></th>
+            <th width=40px style="border-radius: 0 6px 0 0;">{{item.cumulative}}<img src="assets/images/off.png" alt=""></th>
+          </tr>
+        </thead>
+        <tbody style="height: 360px; overflow-y: scroll;display: block;">
+          <tr *ngFor="let item of list" (click)="showMaintain(item)">
+            <td width=20px>{{item.id}}</td>
+            <td width=20px>{{item.pic}}</td>
+            <td width=20px>{{item.administrator}}</td>
+            <td width=40px style="font-size: 20px;color: rgba(210, 58, 95, 100);">{{item.event}}<span class="redT"
+                style="font-size: 10px;">個</span></td>
+            <td width=40px class="blueT" style="color: rgba(59, 174, 229, 100);">
+              {{item.duration}}<span>H</span>&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/images/K.svg"
+                (click)="exchangelogo()" alt=""></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="rigth">
+    <div class="up">
+      <div class="up-top">
+        <form action="" method="get">
+          <label><input name="Plant" type="checkbox" value="" />ALL</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label><input name="Plant" type="checkbox" value="" />P5(F232)</label>&nbsp;&nbsp;
+          <label><input name="Plant" type="checkbox" value="" />P6A(F237)</label>&nbsp;&nbsp;
+          <label><input name="Plant" type="checkbox" value="" />P6B(F236)</label>&nbsp;&nbsp;
+          <label><input name="Plant" type="checkbox" value="" />XKS(F2C1)</label>&nbsp;&nbsp;
+          <label><input name="Plant" type="checkbox" value="" />WMY(F7B1)</label>&nbsp;&nbsp;
+          <label><input name="Plant" type="checkbox" value="" />WKS</label>
+        </form>
+      </div>
+      <div class="up-down">
+
+      </div>
+    </div>
+    <div style="width: 100%;" class="bottom">
+      <table>
+        <thead>
+          <tr>
+            <th style="border-radius: 6px 0 0 0;">序号</th>
+            <th>PIC</th>
+            <th>发生时间</th>
+            <th>持续时间(min)</th>
+            <th>地点</th>
+            <th>系统名称</th>
+            <th>群组</th>
+            <th>内容</th>
+            <th>状态</th>
+            <th style="border-radius: 0 6px 0 0;">Level</th>
+          </tr>
+        </thead>
+        <tbody style="height: 360px; overflow-y: scroll;display: block;">
+          <tr *ngFor="let item of list" (click)="showMaintain(item)">
+            <td>{{item.id}}</td>
+            <td>{{item.pic}}</td>
+            <td>{{item.pic}}</td>
+            <td width=40px class="blueT" style="color: rgba(59, 174, 229, 100);">
+              {{item.duration}}<span>H</span></td>
+            <td>{{item.pic}}</td>
+            <td>{{item.pic}}</td>
+            <td>{{item.pic}}</td>
+            <td>{{item.administrator}}</td>
+            <!-- <div style="display: inline-block; background-color: red; width: 10px;height: 10px; border-radius: 45%;"></div> -->
+            <td style="font-size: 20px;color: rgba(210, 58, 95, 100);">
+              <div
+                style="display: inline-block; background-color:rgba(210, 58, 95, 100); width: 10px;height: 10px; border-radius: 45%;">
+              </div>{{item.event}}<span class="redT" style="font-size: 10px;">個</span>
+            </td>
+            <td class="blueT" style="color: rgba(59, 174, 229, 100);">
+              {{item.duration}}<span>H</span>&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/images/K.svg"
+                (click)="exchangelogo()" alt=""></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

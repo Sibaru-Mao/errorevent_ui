@@ -1,0 +1,186 @@
+
+.content {
+  height: 92%;
+  width: 100%;
+  background-color: rgba(27, 29, 31, 100);
+  display: flex;
+}
+
+.left {
+  display: inline-block;
+  padding-left: 11px;
+  padding-top: 10px;
+  height: 100%;
+  width: 33%;
+}
+
+.rigth {
+  display: inline-block;
+  height: 100%;
+  width: 70%;
+  padding-top: 10px;
+  padding-right: 11px;
+}
+
+.top {
+  width: 100%;
+  height: 18.5%;
+  display: flex;
+}
+
+.box-left {
+  width: 45%;
+  height: 100%;
+  background-color: rgb(241, 47, 47, 0.1);
+  border-radius: 4px;
+  border: 2px solid #572634;
+  box-shadow: 0px 0px 6px 2px #572634 inset;
+  display: flex;
+  flex-direction: column;
+}
+
+.box-right {
+  margin-left: 5%;
+  width: 45%;
+  height: 100%;
+  background-color: rgb(80, 120, 230, 0.1);
+  border-radius: 4px;
+  border: 2px solid #275267;
+  box-shadow: 0px 0px 6px 2px #275267 inset;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom {
+  width: 95%;
+  height: 78.5%;
+  margin: 8px 0 0 0;
+  background-color: rgba(32, 48, 51, 100);
+  border-radius: 6px;
+}
+
+
+
+.redT {
+  color: rgba(210, 58, 95, 100);
+  font-size: 16px;
+}
+
+
+
+.blueT {
+  color: rgba(59, 174, 229, 100);
+  font-size: 16px;
+}
+
+p {
+  color: rgba(182, 195, 204, 100);
+  font-size: 12px;
+  text-align: center;
+  margin-top: -5px;
+  font-family: SourceHanSansSC-regular;
+}
+
+.bottom table {
+  width: 100%;
+  min-height: 20%;
+}
+
+.bottom thead tr {
+  color: rgba(255, 255, 255, 100);
+  background-color: rgba(48, 73, 77, 100);
+  font-size: 12px;
+  text-align: center;
+  height: 50px;
+}
+
+.bottom tbody tr {
+  color: rgba(255, 255, 255, 100);
+  border: 1px solid #3E4F50;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  text-align: center;
+  height: 40px;
+}
+
+.bottom tbody tr:hover{
+  background-color: rgba(72, 156, 156, 100);;
+}
+
+.bottom td:checked {
+  background-color: rgba(72, 156, 156, 100);
+}
+
+.bottom img {
+  height: 14px;
+  width: 14px;
+}
+
+.redN {
+  color: rgba(210, 58, 95, 100);
+  font-size: 50px;
+  font-family: SourceHanSansSC-regular;
+}
+
+.blueN {
+  color: rgba(59, 174, 229, 100);
+  font-size: 50px;
+  font-family: SourceHanSansSC-regular;
+}
+
+table thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table tbody tr {
+  cursor: pointer;
+}
+
+img {
+  cursor: pointer;
+}
+
+table tbody::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
+  background: #2A4C4E;
+  margin: 0;
+}
+
+table tbody::-webkit-scrollbar-track {
+  margin: 0;
+}
+
+table tbody::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  min-height: 3%;
+  background: #489C9C;
+  margin: 0;
+}
+
+.up {
+  width: 100%;
+  height: 18.5%;
+  padding: 12px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 100);
+  background-color: rgba(40, 60, 64, 100);
+}
+
+.up-top{
+  width: 100%;
+  height: 50%;
+}
+
+.up-down{
+  width: 100%;
+  height: 50%;
+}
+
+.down {
+  background-color: rgba(40, 60, 64, 100);
+}
