@@ -20,7 +20,7 @@ ADD . /app/
 WORKDIR /app
 
 # 從第一階段的檔案copy
-COPY ./dist/errorEvent /usr/share/nginx/html
+COPY ./dist/errorEvent/ /usr/share/nginx/html
 
 # 覆蓋image裡的設定檔
 COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf 
