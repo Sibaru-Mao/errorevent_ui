@@ -1,11 +1,16 @@
 {
+  "api":"http://errorevent-api.k8sprd-wks.k8s.wistron.com/api/",
+  "outapi":"https://ifactory.wistron.com/mynotifyserve/rest/event/getEventIdList",
   "menu": {
     "event": {
       "id": "序号",
       "pic": "PIC",
       "administrator": "主管",
       "event": "未结案事件数",
-      "cumulative": "累计持续时间"
+      "cumulative": "累计持续时间",
+      "on":"assets/images/on.png",
+      "off":"assets/images/off.png",
+      "bool":false
     },
     "level": {
       "occurrence": "发生时间",
@@ -16,6 +21,48 @@
       "content": "内容",
       "status": "状态",
       "level": "Level"
-    }
+    },
+    "plant":[
+      { "data":"" ,"name": "ALL" },
+      { "data":"F232","name": "P5(F232) " },
+      { "data":"F237","name": "P6A(F237)" },
+      { "data":"F236","name": "P6B(F236)" },
+      { "data":"F2C1","name": "XKS(F2C1)" },
+      { "data":"F7B1","name": "WMY(F7B1)" },
+      { "data":"WKS" ,"name": "WKS" }
+    ],
+    "levelN": [
+      {"status":true,"name": "ALL"   ,"data":"","logo":""},
+      {"status":true,"name": "LeveL1","data":"L1","logo":"assets/images/1o.png"},
+      {"status":true,"name": "LeveL2","data":"L2","logo":"assets/images/2o.png"},
+      {"status":true,"name": "LeveL3","data":"L3","logo":"assets/images/3o.png"},
+      {"status":true,"name": "LeveL4","data":"L4","logo":"assets/images/4o.png"}
+    ],
+    "status": [
+      {"status":true,"name": "ALL"     ,"data":"","logo":""},
+      {"status":true,"name": "Open"    ,"data":"0","logo":"assets/images/red.png"},
+      {"status":true,"name": "On-Going","data":"3","logo":"assets/images/yellow.png"},
+      {"status":true,"name": "Pending" ,"data":"4","logo":"assets/images/grey.png"}
+    ],
+    "logo":[
+      {"name":"事件編號:","image":"assets/images/copy.svg","value":null},
+      {"name":"報警類型:"},
+      {"name":"事件地點:"},
+      {"name":"發生時間:"},
+      {"name":"處理時間:"},
+      {"name":"解除時間:"},
+      {"name":"結案時間:"},
+      {"name":"PIC:"},
+      {"name":"主管:"},
+      {"name":"主管電話:"},
+      {"name":"報警系統:"}
+    ],
+    "logor":[
+      {"name":"回復日期:"},
+      {"name":"處理方法:"},
+      {"name":"處理描述:"},
+      {"name":"原因分析:"},
+      {"name":"原因描述:"}
+    ]
   }
 }

@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-header',
@@ -8,18 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router, private http: ServiceService) { }
 
-  ngOnInit(): void {
-  }
-
-  // goHome(){
-  //   this.router.navigate(['/home'])
-  // }
-
-
-  goToMaintain(){
-    this.router.navigate(['home/maintain'])
-    console.log('111111111111111111');
+  async ngOnInit() {
+    // console.log(await this.http.get('sortByEvents/errorsort?plant=wks'),1111)
   }
 }

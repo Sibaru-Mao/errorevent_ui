@@ -1,0 +1,195 @@
+# cache
+cache:
+  untracked: true
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - node_modules/
+
+stages:
+  - test
+  - setup
+  - build
+  - deploy
+  - update
+
+get_version:
+  only:
+    - master
+    - /^pre-production.*$/
+    - production
+    - forkprd
+    - /^fix-.*$/
+  image: harbor.wks.wistron.com.cn/base_image/vc-tool:latest
+  stage: setup
+  tags:
+    - wks-runner01
+  before_script:
+    - . ci-version.sh
+  script:
+    - get_version
+  artifacts:
+    paths:
+      - build-vars.sh
+    when: always
+    expire_in: 1 days
+
+docker-build:
+  only:
+    - master
+    - production
+    - /^pre-production.*$/
+    - /^fix-.*$/
+  image: harbor.wks.wistron.com.cn/base_image/vc-tool:latest
+  stage: deploy
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  tags:
+    - wks-runner01
+  before_script:
+    - source build-vars.sh
+    - echo ${SYS_VER}
+    - . ci-version.sh
+  script:
+    - docker_build
+  artifacts:
+    paths:
+      - build-vars-docker_build.sh
+    when: always
+    expire_in: 1 days
+
+update:
+  only:
+    - master
+    - /^pre-production.*$/
+    - production
+    - forkprd
+    - /^fix-.*$/
+  tags:
+    - wks-runner01
+  stage: update
+  image: harbor.wks.wistron.com.cn/base_image/vc-tool:latest
+  before_script:
+    - export CI_JOB_TIMESTAMP=$(date +"%s")
+    - |
+      {
+        source build-vars-docker_build.sh;
+      } || {
+        echo "No need to update."; 
+        exit 0;
+      }
+    - echo ${SYS_VER}
+    - . ci-version.sh
+  script:
+    - cd_update
+
+
+ng-test:
+  image: harbor.wks.wistron.com.cn/base_image/ng-cli-karma:9.1.6
+  stage: test
+  except:
+    - tags
+  before_script:
+    - if test "${SOURCEPJ}" != "true"; then echo "Not Source Code Project, exit ci."; exit 0; fi;
+    - npm install
+    - npm update
+  script:
+    # - npm test
+    - echo "test success"
+  tags:
+    - wks-runner01
+
+ng-build:
+  only:
+    - master
+    - pre-production
+    - production
+    - forkprd
+    - /^fix-.*$/
+  image: harbor.wks.wistron.com.cn/base_image/ng-cli-karma:9.1.6
+  stage: build
+  before_script:
+    - npm install
+  script:
+    - node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build
+    - ng build --prod && cp ./nginx-custom.conf ./dist/nginx-custom.conf 
+  tags:
+    - wks-runner01
+  artifacts:
+    paths:
+      - ./dist/
+    when: always
+    expire_in: 1 days
+
+get_version:
+  only:
+    - master
+    - /^pre-production.*$/
+    - production
+    - forkprd
+    - /^fix-.*$/
+  image: harbor.wks.wistron.com.cn/base_image/alpine:3.10
+  stage: setup
+  tags:
+    - wks-runner01
+  before_script:
+    - apk add curl
+    - apk add jq
+    - . ci-funcs.sh
+  script:
+    - get_version
+  artifacts:
+    paths:
+      - build-vars.sh
+    when: always
+    expire_in: 1 days
+
+docker-build:
+  only:
+    - master
+    - production
+    - /^pre-production.*$/
+    - /^fix-.*$/
+  image: harbor.wks.wistron.com.cn/base_image/vc-tool:latest
+  stage: deploy
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  tags:
+    - wks-runner01
+  before_script:
+    - source build-vars.sh
+    - echo ${SYS_VER}
+    - . ci-funcs.sh
+  script:
+    - docker_build
+  artifacts:
+    paths:
+      - build-vars-docker_build.sh
+    when: always
+    expire_in: 1 days
+
+update:
+  only:
+    - master
+    - /^pre-production.*$/
+    - production
+    - forkprd
+    - /^fix-.*$/
+  tags:
+    - wks-runner01
+  stage: update
+  image: harbor.wks.wistron.com.cn/base_image/alpine:3.10
+  before_script:
+    - apk add curl
+    - apk add jq
+    - export CI_JOB_TIMESTAMP=$(date +"%s")
+    - |
+      {
+        source build-vars-docker_build.sh;
+      } || {
+        echo "No need to update."; 
+        exit 0;
+      }
+    - echo ${SYS_VER}
+    - . ci-funcs.sh
+  script:
+    - cd_update

@@ -5,8 +5,8 @@
 
     <div class="top">
       <div class="box-left">
-        <div style="text-align: center;margin-top: -5px;">
-          <span class="redN">54</span>
+        <div style="text-align: center;">
+          <span class="redN">{{cumulativeEvent}}</span>
           <span class="redT">個</span>
         </div>
 
@@ -14,8 +14,8 @@
 
       </div>
       <div class="box-right">
-        <div style="text-align: center;  margin-top: -5px;">
-          <span class="blueN">45</span>
+        <div style="text-align: center;">
+          <span class="blueN">{{durationTime}}</span>
           <span class="blueT">H</span>
         </div>
         <p>累计持续时间</p>
@@ -26,23 +26,26 @@
       <table>
         <thead>
           <tr *ngFor="let item of eventObj">
-            <th width=20px style="border-radius: 6px 0 0 0;">{{item.id}}</th>
-            <th width=20px>{{item.pic}}</th>
-            <th width=20px>{{item.administrator}}</th>
-            <th width=40px>{{item.event}}<img src="assets/images/on.png" (click)="exchangelogo()" alt=""></th>
-            <th width=40px style="border-radius: 0 6px 0 0;">{{item.cumulative}}<img src="assets/images/off.png" alt=""></th>
+            <th width=8px style="border-radius: 6px 0 0 0;">{{item.id}}</th>
+            <th width=24px>{{item.pic}}</th>
+            <th width=24px>{{item.administrator}}</th>
+            <th width=30px>{{item.event}}<img src={{item.on}} (click)="eventSort(list,'QTYEVENTS',true)">
+            </th>
+            <th width=30px style="border-radius: 0 6px 0 0;">{{item.cumulative}}
+              <img src={{item.off}} (click)="eventSort(list,'QTYTIME',false)">
+            </th>
           </tr>
         </thead>
-        <tbody style="height: 360px; overflow-y: scroll;display: block;">
-          <tr *ngFor="let item of list" (click)="showMaintain(item)">
-            <td width=20px>{{item.id}}</td>
-            <td width=20px>{{item.pic}}</td>
-            <td width=20px>{{item.administrator}}</td>
-            <td width=40px style="font-size: 20px;color: rgba(210, 58, 95, 100);">{{item.event}}<span class="redT"
+        <tbody style="overflow-y: scroll;display: block;">
+          <tr class="logo" [ngClass]="{'logos': item.status}" *ngFor="let item of list" (click)="showMaintain(item)">
+            <td width=8px>{{item.id}}</td>
+            <td width=26px>{{item.BYPIC}}</td>
+            <td width=26px>{{item.MPIC}}</td>
+            <td width=28px style="font-size: 20px;color: rgba(210, 58, 95, 100);">{{item.QTYEVENTS}}<span class="redT"
                 style="font-size: 10px;">個</span></td>
-            <td width=40px class="blueT" style="color: rgba(59, 174, 229, 100);">
-              {{item.duration}}<span>H</span>&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/images/K.svg"
-                (click)="exchangelogo()" alt=""></td>
+            <td width=28px class="blueT" style="color: rgba(59, 174, 229, 100);">
+              {{item.QTYTIME}}<span>H</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <!-- <img src="assets/images/K.svg" alt=""> -->
           </tr>
         </tbody>
       </table>
@@ -52,59 +55,99 @@
   <div class="rigth">
     <div class="up">
       <div class="up-top">
-        <form action="" method="get">
-          <label><input name="Plant" type="checkbox" value="" />ALL</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <label><input name="Plant" type="checkbox" value="" />P5(F232)</label>&nbsp;&nbsp;
-          <label><input name="Plant" type="checkbox" value="" />P6A(F237)</label>&nbsp;&nbsp;
-          <label><input name="Plant" type="checkbox" value="" />P6B(F236)</label>&nbsp;&nbsp;
-          <label><input name="Plant" type="checkbox" value="" />XKS(F2C1)</label>&nbsp;&nbsp;
-          <label><input name="Plant" type="checkbox" value="" />WMY(F7B1)</label>&nbsp;&nbsp;
-          <label><input name="Plant" type="checkbox" value="" />WKS</label>
-        </form>
+        <div *ngFor="let item of plant" class="checkbox" (click)="showLeftList(item,plantList,plant,plantStr)">
+          <div class="dot" [ngClass]="{'choice': item.status}"></div>&nbsp;
+          <div class="name"> {{item.name}}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
       </div>
-      <div class="up-down">
-
+      <div>
+        <div class="up-top-left">
+          <div *ngFor="let item of levelN" class="checkbox" (click)="showLeftList(item,levelList,levelN,levelStr)">
+            <div class="dot" [ngClass]="{'choice': item.status}"></div>
+            <div class="name">&nbsp;<img style="height:18px;width:18px" *ngIf="item.logo !=''" src={{item.logo}} alt=""> {{item.name}}</div>
+            &nbsp;&nbsp;
+          </div>
+        </div>
+        <div class="up-top-left" style="width: 40%">
+          <div *ngFor="let item of statusN" class="checkbox" (click)="showLeftList(item,statusList,statusN,statusStr)">
+            <div class="dot" [ngClass]="{'choice': item.status}"></div>
+            <div class="name">&nbsp;<img *ngIf="item.logo !=''" src={{item.logo}} alt=""> {{item.name}}</div>
+            &nbsp;
+          </div>
+        </div>
       </div>
     </div>
     <div style="width: 100%;" class="bottom">
       <table>
         <thead>
           <tr>
-            <th style="border-radius: 6px 0 0 0;">序号</th>
-            <th>PIC</th>
-            <th>发生时间</th>
-            <th>持续时间(min)</th>
-            <th>地点</th>
-            <th>系统名称</th>
-            <th>群组</th>
-            <th>内容</th>
-            <th>状态</th>
-            <th style="border-radius: 0 6px 0 0;">Level</th>
+            <th style="width:4%;border-radius: 6px 0 0 0;">序号</th>
+            <th width=11%>PIC</th>
+            <th width=13%>发生时间</th>
+            <th width=9%>持续时间(H)</th>
+            <th width=4%>地点</th>
+            <th width=15%>系统名称</th>
+            <th width=5%>群组</th>
+            <th width=30%>内容</th>
+            <th width=9%>状态</th>
+            <th style="width:5%;border-radius: 0 6px 0 0;">Level</th>
           </tr>
         </thead>
-        <tbody style="height: 360px; overflow-y: scroll;display: block;">
-          <tr *ngFor="let item of list" (click)="showMaintain(item)">
-            <td>{{item.id}}</td>
-            <td>{{item.pic}}</td>
-            <td>{{item.pic}}</td>
-            <td width=40px class="blueT" style="color: rgba(59, 174, 229, 100);">
-              {{item.duration}}<span>H</span></td>
-            <td>{{item.pic}}</td>
-            <td>{{item.pic}}</td>
-            <td>{{item.pic}}</td>
-            <td>{{item.administrator}}</td>
-            <!-- <div style="display: inline-block; background-color: red; width: 10px;height: 10px; border-radius: 45%;"></div> -->
-            <td style="font-size: 20px;color: rgba(210, 58, 95, 100);">
-              <div
-                style="display: inline-block; background-color:rgba(210, 58, 95, 100); width: 10px;height: 10px; border-radius: 45%;">
-              </div>{{item.event}}<span class="redT" style="font-size: 10px;">個</span>
-            </td>
-            <td class="blueT" style="color: rgba(59, 174, 229, 100);">
-              {{item.duration}}<span>H</span>&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/images/K.svg"
-                (click)="exchangelogo()" alt=""></td>
-          </tr>
+        <tbody style="overflow-y: scroll;display: block;">
+          <ng-container *ngFor="let item of listR">
+            <tr (click)="showLogo(item)">
+              <td width=4%>{{item.id}}</td>
+              <td width=11%>{{pic}}</td>
+              <td width=13%>{{item.occurrence}}</td>
+              <td width=10% width=40px class="blueT" style="color: rgba(59, 174, 229, 100);">{{item.duration}}</td>
+              <td width=9%>{{item.situation}}</td>
+              <td width=9%>{{item.picgroup}}</td>
+              <td width=11%>{{system}}</td>
+              <td width=25%>{{item.content}}</td>
+              <td style="width:9%;font-size: 14px;color: rgba(210, 58, 95, 100);"
+                [ngStyle]="{'color': item.eventstatus=='Open'?'rgba(210, 58, 95)':item.eventstatus=='On-Going'?'rgba(255, 165, 0)':'rgba(179, 179, 179)'}">
+                <div
+                  style="width:4%;display: inline-block;width: 8px;height: 8px; border-radius: 45%;text-align: center;"
+                  [ngStyle]="{'background-color': item.eventstatus=='Open'?'rgba(210, 58, 95)':item.eventstatus=='On-Going'?'rgba(255, 165, 0)':'rgba(179, 179, 179)'}">
+                </div> {{item.eventstatus}}
+              </td>
+              <ng-container [ngSwitch]="item.level">
+                <td *ngSwitchCase="'L1'">
+                  <img style="height:18px;width:18px" src="assets/images/1o.png">
+                </td>
+                <td *ngSwitchCase="'L2'">
+                  <img style="height:18px;width:18px" src="assets/images/2o.png">
+                </td>
+                <td *ngSwitchCase="'L3'">
+                  <img style="height:18px;width:18px" src="assets/images/3o.png">
+                </td>
+                <td *ngSwitchDefault>
+                  <img style="height:18px;width:18px" src="assets/images/4o.png">
+                </td>
+              </ng-container>
+            </tr>
+            <div style="padding: 20px,50px;" class="logo" [ngClass]="{'showlogo': item.status}">
+              <ul>
+                <li style="list-style: none;" *ngFor="let item of logo">{{item.name}}&nbsp;{{item.value}} <img
+                    *ngIf="item.image=='assets/images/copy.svg'" src={{item.image}}></li>
+                    <hr *ngIf="item.name=='報警系統:'">
+              </ul>
+              <!-- <hr> -->
+              <ul>
+                <ng-container *ngFor="let item of evtvalue"><li style="list-style: none;">{{item.name}}&nbsp;{{item.value}}</li></ng-container>
+              </ul>
+              <!-- <hr> -->
+              <div style="background-color: rgba(40, 60, 64, 100);height: auto; ">
+              <ul style="position: relative;margin-bottom: 0;padding-top: 7px;">
+                <div style="width: auto; ;background-color: #15494b;position: absolute;display: inline-block;top:-11px">{{username}}</div>
+                <ng-container *ngFor="let item of logor"><li style="list-style: none;" *ngIf="item.value!=null && item.value!=''">{{item.name}}&nbsp;{{item.value}}</li></ng-container>
+              </ul>
+              </div>
+            </div>
+          </ng-container>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
