@@ -30,8 +30,8 @@ export class AppComponent {
   levelN = config.menu.levelN;
   statusN = config.menu.status;
   plant = config.menu.plant;
-  // logo = config.menu.logo;
-  // logor=config.menu.logor
+  logo = config.menu.logo;
+  logor=config.menu.logor
   loading = false;
 
   constructor(private http: ServiceService) { }
