@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
+import * as config from '../../../assets/configs/config.json'
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { ServiceService } from 'src/app/services/service.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  url=config.url
   constructor(private router: Router, private http: ServiceService) { }
 
   async ngOnInit() {

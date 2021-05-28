@@ -1,6 +1,7 @@
 {
   "api":"http://errorevent-api.k8sprd-wks.k8s.wistron.com/api/",
   "outapi":"https://ifactory.wistron.com/mynotifyserve/rest/event/getEventIdList",
+  "url":"http://dmc-ecc.ui.10.42.226.2.k8sprd-wks.k8s.wistron.com/",
   "menu": {
     "event": {
       "id": "序号",
