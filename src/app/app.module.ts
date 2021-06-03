@@ -1,5 +1,6 @@
+import { DataSourceService } from './services/config';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,13 @@ import zh from '@angular/common/locales/zh';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { HeaderComponent } from './pages/header/header.component';
+export function configureProvider(loader: DataSourceService): () => Promise<void> {
+  return async () => {
+    await loader.loadConfigure([
+      { path: 'assets/configs/config.json', type: 'datasources' }
+    ]);
+  };
+}
 
 
 
@@ -35,7 +43,16 @@ registerLocaleData(zh);
     NzButtonModule,
     NgxLoadingModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [
+    { provide: NZ_I18N, useValue: zh_CN },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: configureProvider,
+      deps: [DataSourceService],
+      multi: true
+    },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

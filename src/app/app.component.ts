@@ -1,8 +1,9 @@
+import { DataSourceService } from './services/config';
 import { ServiceService } from 'src/app/services/service.service';
 import { Component } from '@angular/core';
-import * as config from '../assets/configs/config.json'
 
-ServiceService
+// import * as config from '../assets/configs/config.json'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,27 +17,40 @@ export class AppComponent {
   list = [];
   listR = [];
   temporaryListR = [];
-  evtvalue=[]
+  evtvalue = []
   username
   pic
   array
   temproary
   system
+  config
   durationTime = 0;
   cumulativeEvent = 0;
-  eventObj = [config.menu.event];
-  levelObj = [config.menu.level];
+  eventObj 
+  levelObj 
   plantName = [];
-  levelN = config.menu.levelN;
-  statusN = config.menu.status;
-  plant = config.menu.plant;
-  logo = config.menu.logo;
-  logor=config.menu.logor
+  levelN 
+  statusN 
+  plant 
+  logo
+  logor 
   loading = false;
 
-  constructor(private http: ServiceService) { }
+  constructor(
+    private http: ServiceService,
+    private configservice: DataSourceService
+  ) { }
 
   async ngOnInit() {
+    this.config = this.configservice.getSpecificConfigure('datasources');
+    this.eventObj = [this.config.menu.event];
+    this.levelObj = [this.config.menu.level];
+    this.levelN = this.config.menu.levelN;
+    this.statusN= this.config.menu.status;
+    this.plant  = this.config.menu.plant;
+    this.logo   = this.config.menu.logo;
+    this.logor  = this.config.menu.logor
+
     this.plant.forEach(e => {
       e['status'] = true
       this.plantList.push(e["data"])
@@ -130,11 +144,11 @@ export class AppComponent {
   }
 
   eventSort(list, value) {
-    if (arguments[arguments.length - 1] == config.menu.event.bool) {
-      config.menu.event.bool = !config.menu.event.bool
-      let light = config.menu.event.on;
-      config.menu.event.on = config.menu.event.off;
-      config.menu.event.off = light;
+    if (arguments[arguments.length - 1] == this.config.menu.event.bool) {
+      this.config.menu.event.bool = !this.config.menu.event.bool
+      let light = this.config.menu.event.on;
+      this.config.menu.event.on = this.config.menu.event.off;
+      this.config.menu.event.off = light;
       list.sort(this.compare(value))
       this.refresh(list)
       this.showMaintain(this.list[0])
@@ -142,7 +156,7 @@ export class AppComponent {
   }
 
   async showLogo(item) {
-    
+
     if (item.status == false) {
       let statusTem
       this.statusN.forEach(element => {
@@ -152,28 +166,28 @@ export class AppComponent {
       });
       this.loading = true;
       this.array = await this.http.get('sortByEvents/eventtype?type=' + item.eventtime + '&pic=' + this.pic + '&plant=' + item.situation + '&status=' + statusTem + '&level=' + item.level)
-      this.logo=[]
-      this.logo=[
-        {"name":"事件編號:","image":"assets/images/copy.svg","value":null},
-        {"name":"報警類型:"},
-        {"name":"事件地點:"},
-        {"name":"發生時間:"},
-        {"name":"處理時間:"},
-        {"name":"解除時間:"},
-        {"name":"結案時間:"},
-        {"name":"PIC:"},
-        {"name":"主管:"},
-        {"name":"主管電話:"},
-        {"name":"報警系統:"}
+      this.logo = []
+      this.logo = [
+        { "name": "事件編號:", "image": "assets/images/copy.svg", "value": null },
+        { "name": "報警類型:" },
+        { "name": "事件地點:" },
+        { "name": "發生時間:" },
+        { "name": "處理時間:" },
+        { "name": "解除時間:" },
+        { "name": "結案時間:" },
+        { "name": "PIC:" },
+        { "name": "主管:" },
+        { "name": "主管電話:" },
+        { "name": "報警系統:" }
       ]
-      this.logor=[
-        {"name":"回復日期:"},
-        {"name":"處理方法:"},
-        {"name":"處理描述:"},
-        {"name":"原因分析:"},
-        {"name":"原因描述:"}
+      this.logor = [
+        { "name": "回復日期:" },
+        { "name": "處理方法:" },
+        { "name": "處理描述:" },
+        { "name": "原因分析:" },
+        { "name": "原因描述:" }
       ]
-      
+
       this.loading = false;
       this.logo[0]['value'] = this.array['res'][0]['uId']
       this.logo[1]['value'] = this.array['res'][0]['eventtype']
@@ -186,16 +200,16 @@ export class AppComponent {
       this.logo[8]['value'] = this.array['res'][0]['MPIC']
       this.logo[9]['value'] = this.array['res'][0]['mPicPhone']
       this.logo[10]['value'] = this.array['res'][0]['eventName']
-      if (this.array['res'][0]['reply']=='()') {
+      if (this.array['res'][0]['reply'] == '()') {
         this.username = ''
-      }else{
+      } else {
         this.username = this.array['res'][0]['reply']
-      }   
+      }
       this.logor[0]['value'] = this.array['res'][0]['replyDate']
       this.logor[1]['value'] = this.array['res'][0]['actionname']
       this.logor[2]['value'] = this.array['res'][0]['comment']
       this.logor[3]['value'] = this.array['res'][0]['reasonName']
-      this.logor[4]['value'] = this.array['res'][0]['reason'] 
+      this.logor[4]['value'] = this.array['res'][0]['reason']
       this.listR.forEach(element => {
         element.status = false
       });
@@ -207,16 +221,16 @@ export class AppComponent {
           })
         }
       }
-      this.evtvalue=[]
+      this.evtvalue = []
       for (let i = 1; i <= 15; i++) {
         if (this.array['res'][0]['evtvalue' + i] != "" && this.array['res'][0]['evtvalue' + i] != "null" && this.array['res'][0]['evtvalue' + i] != null) {
-          this.evtvalue.push({ 
+          this.evtvalue.push({
             'name': "evtvalue" + i + ":",
             'value': this.array['res'][0]['evtvalue' + i]
           })
         }
       }
-      
+
     }
     item.status = !item.status
   }
