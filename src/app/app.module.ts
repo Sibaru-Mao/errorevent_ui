@@ -13,7 +13,6 @@ import { registerLocaleData } from '@angular/common';
 import { NgxLoadingModule } from 'ngx-loading';
 import zh from '@angular/common/locales/zh';
 
-
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { HeaderComponent } from './pages/header/header.component';
 export function configureProvider(loader: DataSourceService): () => Promise<void> {
@@ -51,7 +50,6 @@ registerLocaleData(zh);
       deps: [DataSourceService],
       multi: true
     },
-
   ],
   bootstrap: [AppComponent]
 })

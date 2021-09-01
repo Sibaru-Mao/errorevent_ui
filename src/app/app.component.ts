@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { DataSourceService } from './services/config';
 import { ServiceService } from 'src/app/services/service.service';
 import { Component } from '@angular/core';
@@ -26,19 +27,20 @@ export class AppComponent {
   config
   durationTime = 0;
   cumulativeEvent = 0;
-  eventObj 
-  levelObj 
+  eventObj
+  levelObj
   plantName = [];
-  levelN 
-  statusN 
-  plant 
+  levelN
+  statusN
+  plant
   logo
-  logor 
+  logor
   loading = false;
 
   constructor(
     private http: ServiceService,
-    private configservice: DataSourceService
+    private configservice: DataSourceService,
+    private http2: HttpClient
   ) { }
 
   async ngOnInit() {
@@ -46,10 +48,10 @@ export class AppComponent {
     this.eventObj = [this.config.menu.event];
     this.levelObj = [this.config.menu.level];
     this.levelN = this.config.menu.levelN;
-    this.statusN= this.config.menu.status;
-    this.plant  = this.config.menu.plant;
-    this.logo   = this.config.menu.logo;
-    this.logor  = this.config.menu.logor
+    this.statusN = this.config.menu.status;
+    this.plant = this.config.menu.plant;
+    this.logo = this.config.menu.logo;
+    this.logor = this.config.menu.logor
 
     this.plant.forEach(e => {
       e['status'] = true
@@ -60,12 +62,17 @@ export class AppComponent {
       element['status'] = true
     });
     this.showLeftList(this.plant[0], this.plantList, this.plant, this.plantStr);
+    console.log(await this.load(), 11111);
   }
+
+
   refresh(list) {
     list.forEach((e, i) => {
       e['id'] = i + 1;
       e['status'] = false
     });
+
+
   }
 
   async showLeftList(value, list, item, str) {
@@ -233,6 +240,14 @@ export class AppComponent {
 
     }
     item.status = !item.status
+  }
+
+  async load() {
+    return await this.http2.get('assets/configs/config.json').toPromise()
+      .then(res => res)
+      .catch(ex => {
+        return ex
+      })
   }
 
   async showMaintain(item) {
