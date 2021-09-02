@@ -26,10 +26,12 @@
     "plant":[
       { "data":"" ,"name": "ALL" },
       { "data":"F232","name": "P5(F232) " },
-      { "data":"F237","name": "P6A(F237)" },
       { "data":"F236","name": "P6B(F236)" },
       { "data":"F2C1","name": "XKS(F2C1)" },
       { "data":"F7B1","name": "WMY(F7B1)" },
+      { "data":"F741","name": "WOK(F741)" },
+      { "data":"261","name": "WTZ(261)" },
+      { "data":"F139","name": "WZS(F139)" },
       { "data":"WKS" ,"name": "WKS" }
     ],
     "levelN": [

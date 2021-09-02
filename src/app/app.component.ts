@@ -250,6 +250,7 @@ export class AppComponent {
       })
   }
 
+  //拉取异常信息数据
   async showMaintain(item) {
     if (item == undefined) {
       this.listR = []
@@ -265,11 +266,17 @@ export class AppComponent {
     this.showRightList()
 
     this.temproary = await this.http.post('', '')
-    this.system = this.temproary.data.filter(element => {
-      return element.eventId == this.listR[0].eventId && element.plant == item.plant
+    // this.system = 
+    this.temproary.data.forEach(element => {
+      for(let elem of this.listR){
+        if(element.eventId == elem.eventId && element.plant == item.plant){
+          elem.system=element.eventName
+        }
+      }
+      // return element.eventId == this.listR[0].eventId && element.plant == item.plant
     });
-    this.system = this.system[0].eventName;
-    this.system = this.system.replace(new RegExp(".*_"), "")
+    // this.system = this.system[0].eventName;
+    // this.system = this.system.replace(new RegExp(".*_"), "")
 
   }
 }
