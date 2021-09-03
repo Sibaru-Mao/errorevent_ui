@@ -2,6 +2,7 @@
   "api":"http://errorevent-api.k8sprd-wks.k8s.wistron.com/api/",
   "outapi":"https://ifactory.wistron.com/mynotifyserve/rest/event/getEventIdList",
   "url":"http://dmc-ecc.ui.10.42.226.2.k8sprd-wks.k8s.wistron.com/",
+  "project":"异常事件管理平台",
   "menu": {
     "event": {
       "id": "序号",
@@ -30,7 +31,7 @@
       { "data":"F2C1","name": "XKS(F2C1)" },
       { "data":"F7B1","name": "WMY(F7B1)" },
       { "data":"F741","name": "WOK(F741)" },
-      { "data":"261","name": "WTZ(261)" },
+      { "data":"261" ,"name": "WTZ(261)" },
       { "data":"F139","name": "WZS(F139)" },
       { "data":"WKS" ,"name": "WKS" }
     ],
@@ -48,17 +49,17 @@
       {"status":true,"name": "Pending" ,"data":"4","logo":"assets/images/grey.png"}
     ],
     "logo":[
-      {"name":"事件編號:","image":"assets/images/copy.svg","value":null},
-      {"name":"報警類型:"},
-      {"name":"事件地點:"},
-      {"name":"發生時間:"},
-      {"name":"處理時間:"},
-      {"name":"解除時間:"},
-      {"name":"結案時間:"},
-      {"name":"PIC:"},
-      {"name":"主管:"},
-      {"name":"主管電話:"},
-      {"name":"報警系統:"}
+      {"en_name":"UID","name":"事件編號:","image":"assets/images/copy.svg","value":null},
+      {"en_name":"Type","name":"報警類型:"},
+      {"en_name":"Location","name":"事件地點:"},
+      {"en_name":"Event Time","name":"發生時間:"},
+      {"en_name":"Processing Time","name":"處理時間:"},
+      {"en_name":"End Time","name":"解除時間:"},
+      {"en_name":"Closed Time","name":"結案時間:"},
+      {"en_name":"PIC","name":"PIC:"},
+      {"en_name":"Manage","name":"主管:"},
+      {"en_name":"Manager Phone","name":"主管電話:"},
+      {"en_name":"System","name":"報警系統:"}
     ],
     "logor":[
       {"name":"回復日期:"},

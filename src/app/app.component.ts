@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { DataSourceService } from './services/config';
 import { ServiceService } from 'src/app/services/service.service';
 import { Component } from '@angular/core';
-
-// import * as config from '../assets/configs/config.json'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -40,10 +39,12 @@ export class AppComponent {
   constructor(
     private http: ServiceService,
     private configservice: DataSourceService,
+    public translateService: TranslateService,
     private http2: HttpClient
-  ) { }
+  ) {}
 
   async ngOnInit() {
+    this.changeLanguage('zh')
     this.config = this.configservice.getSpecificConfigure('datasources');
     this.eventObj = [this.config.menu.event];
     this.levelObj = [this.config.menu.level];
@@ -58,7 +59,7 @@ export class AppComponent {
       this.plantList.push(e["data"])
       this.plantStr['str'] = this.plantList.join("','");
     })
-    this.levelN.forEach(element => {
+     this.levelN.forEach(element => {
       element['status'] = true
     });
     this.showLeftList(this.plant[0], this.plantList, this.plant, this.plantStr);
@@ -173,27 +174,27 @@ export class AppComponent {
       });
       this.loading = true;
       this.array = await this.http.get('sortByEvents/eventtype?type=' + item.eventtime + '&pic=' + this.pic + '&plant=' + item.situation + '&status=' + statusTem + '&level=' + item.level)
-      this.logo = []
-      this.logo = [
-        { "name": "事件編號:", "image": "assets/images/copy.svg", "value": null },
-        { "name": "報警類型:" },
-        { "name": "事件地點:" },
-        { "name": "發生時間:" },
-        { "name": "處理時間:" },
-        { "name": "解除時間:" },
-        { "name": "結案時間:" },
-        { "name": "PIC:" },
-        { "name": "主管:" },
-        { "name": "主管電話:" },
-        { "name": "報警系統:" }
-      ]
-      this.logor = [
-        { "name": "回復日期:" },
-        { "name": "處理方法:" },
-        { "name": "處理描述:" },
-        { "name": "原因分析:" },
-        { "name": "原因描述:" }
-      ]
+      // this.logo = []
+      // this.logo = [
+      //   { "name": "事件編號:", "image": "assets/images/copy.svg", "value": null },
+      //   { "name": "報警類型:" },
+      //   { "name": "事件地點:" },
+      //   { "name": "發生時間:" },
+      //   { "name": "處理時間:" },
+      //   { "name": "解除時間:" },
+      //   { "name": "結案時間:" },
+      //   { "name": "PIC:" },
+      //   { "name": "主管:" },
+      //   { "name": "主管電話:" },
+      //   { "name": "報警系統:" }
+      // ]
+      // this.logor = [
+      //   { "name": "回復日期:" },
+      //   { "name": "處理方法:" },
+      //   { "name": "處理描述:" },
+      //   { "name": "原因分析:" },
+      //   { "name": "原因描述:" }
+      // ]
 
       this.loading = false;
       this.logo[0]['value'] = this.array['res'][0]['uId']
@@ -278,5 +279,15 @@ export class AppComponent {
     // this.system = this.system[0].eventName;
     // this.system = this.system.replace(new RegExp(".*_"), "")
 
+    
+  }
+
+  changeLanguage(data) {
+    //     this.translateService.addLangs(["zh", "en"]);
+        this.translateService.setDefaultLang('zh');
+    //     const browserLang = this.translateService.getBrowserLang();
+    //     this.translateService.use(browserLang.match(/zh|en/) ? browserLang : data);
+    console.log(data);
+    this.translateService.use(data)
   }
 }

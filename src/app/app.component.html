@@ -7,18 +7,18 @@
       <div class="box-left">
         <div style="text-align: center;">
           <span class="redN">{{cumulativeEvent}}</span>
-          <span class="redT">個</span>
+          <span class="redT">{{"個" | translate}}</span>
         </div>
 
-        <p>未结案事件总数</p>
+        <p>{{eventObj[0].event | translate}}</p>
 
       </div>
       <div class="box-right">
         <div style="text-align: center;">
-          <span class="blueN">{{durationTime}}</span>
+          <span class="blueN">{{durationTime | translate}}</span>
           <span class="blueT">H</span>
         </div>
-        <p>累计持续时间</p>
+        <p>{{eventObj[0].cumulative | translate}}</p>
       </div>
     </div>
 
@@ -26,12 +26,12 @@
       <table>
         <thead>
           <tr *ngFor="let item of eventObj">
-            <th width=8px style="border-radius: 6px 0 0 0;">{{item.id}}</th>
-            <th width=24px>{{item.pic}}</th>
-            <th width=24px>{{item.administrator}}</th>
-            <th width=30px>{{item.event}}<img src={{item.on}} (click)="eventSort(list,'QTYEVENTS',true)">
+            <th width=8px style="border-radius: 6px 0 0 0;">{{item.id | translate}}</th>
+            <th width=24px>{{item.pic | translate}}</th>
+            <th width=24px>{{item.administrator | translate}}</th>
+            <th width=30px>{{item.event | translate}}<img src={{item.on}} (click)="eventSort(list,'QTYEVENTS',true)">
             </th>
-            <th width=30px style="border-radius: 0 6px 0 0;">{{item.cumulative}}
+            <th width=30px style="border-radius: 0 6px 0 0;">{{item.cumulative | translate}}
               <img src={{item.off}} (click)="eventSort(list,'QTYTIME',false)">
             </th>
           </tr>
@@ -42,10 +42,10 @@
             <td width=26px>{{item.BYPIC}}</td>
             <td width=26px>{{item.MPIC}}</td>
             <td width=28px style="font-size: 20px;color: rgba(210, 58, 95, 100);">{{item.QTYEVENTS}}<span class="redT"
-                style="font-size: 10px;">個</span></td>
+                style="font-size: 10px;">{{"個" | translate}}</span></td>
             <td width=28px class="blueT" style="color: rgba(59, 174, 229, 100);">
               {{item.QTYTIME}}<span>H</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-              <!-- <img src="assets/images/K.svg" alt=""> -->
+            <!-- <img src="assets/images/K.svg" alt=""> -->
           </tr>
         </tbody>
       </table>
@@ -64,7 +64,8 @@
         <div class="up-top-left">
           <div *ngFor="let item of levelN" class="checkbox" (click)="showLeftList(item,levelList,levelN,levelStr)">
             <div class="dot" [ngClass]="{'choice': item.status}"></div>
-            <div class="name">&nbsp;<img style="height:18px;width:18px" *ngIf="item.logo !=''" src={{item.logo}} alt=""> {{item.name}}</div>
+            <div class="name">&nbsp;<img style="height:18px;width:18px" *ngIf="item.logo !=''" src={{item.logo}} alt="">
+              {{item.name}}</div>
             &nbsp;&nbsp;
           </div>
         </div>
@@ -130,18 +131,25 @@
               <ul>
                 <li style="list-style: none;" *ngFor="let item of logo">{{item.name}}&nbsp;{{item.value}} <img
                     *ngIf="item.image=='assets/images/copy.svg'" src={{item.image}}></li>
-                    <hr *ngIf="item.name=='報警系統:'">
+                <hr *ngIf="item.name=='報警系統:'">
               </ul>
               <!-- <hr> -->
               <ul>
-                <ng-container *ngFor="let item of evtvalue"><li style="list-style: none;">{{item.name}}&nbsp;{{item.value}}</li></ng-container>
+                <ng-container *ngFor="let item of evtvalue">
+                  <li style="list-style: none;">{{item.name}}&nbsp;{{item.value}}</li>
+                </ng-container>
               </ul>
               <!-- <hr> -->
               <div style="background-color: rgba(40, 60, 64, 100);height: auto; ">
-              <ul style="position: relative;margin-bottom: 0;padding-top: 7px;">
-                <div style="width: auto; ;background-color: #15494b;position: absolute;display: inline-block;top:-11px">{{username}}</div>
-                <ng-container *ngFor="let item of logor"><li style="list-style: none;" *ngIf="item.value!=null && item.value!=''">{{item.name}}&nbsp;{{item.value}}</li></ng-container>
-              </ul>
+                <ul style="position: relative;margin-bottom: 0;padding-top: 7px;">
+                  <div
+                    style="width: auto; ;background-color: #15494b;position: absolute;display: inline-block;top:-11px">
+                    {{username}}</div>
+                  <ng-container *ngFor="let item of logor">
+                    <li style="list-style: none;" *ngIf="item.value!=null && item.value!=''">
+                      {{item.name}}&nbsp;{{item.value}}</li>
+                  </ng-container>
+                </ul>
               </div>
             </div>
           </ng-container>

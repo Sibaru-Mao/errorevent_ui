@@ -4,22 +4,10 @@
     <img src="assets/images/logo.png" title="退出" alt="圖片丟啦...">
   </div>
   <!-- 標題 -->
-  <span class="title">异常事件管理平台</span>
-  <!-- <div class="home">
-    <a href={{url}}>
-      <img src="assets/images/home.svg" alt="">
-    </a>
-  </div> -->
-  <!-- 搜索模塊 -->
-  <!-- <div class="search">
-    <span class="tip"></span>
-    <input type="text" placeholder="請輸入關鍵字">
-  </div> -->
-  <!-- 維護 -->
-  <!-- <div class="maintain" (click)="goToMaintain()">維護入口</div> -->
+  <span class="title"> {{"中文"|translate}}</span>
   <!-- 語言交換 -->
-  <!-- <select name="" id="selected_search">
-    <option value="">中文</option>
-    <option value="">English</option>
-  </select> -->
+  <select (change)="language($event)" name="" id="selected_search">
+    <option value="zh">{{'中文'|translate}}</option>
+    <option value="en">{{'英文'|translate}}</option>
+  </select>
 </div>
