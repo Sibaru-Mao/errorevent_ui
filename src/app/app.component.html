@@ -82,15 +82,15 @@
       <table>
         <thead>
           <tr>
-            <th style="width:4%;border-radius: 6px 0 0 0;">序号</th>
+            <th style="width:4%;border-radius: 6px 0 0 0;">{{"序号" | translate}}</th>
             <th width=11%>PIC</th>
-            <th width=13%>发生时间</th>
-            <th width=9%>持续时间(H)</th>
-            <th width=4%>地点</th>
-            <th width=15%>系统名称</th>
-            <th width=5%>群组</th>
-            <th width=30%>内容</th>
-            <th width=9%>状态</th>
+            <th width=13%>{{"发生时间" | translate}}</th>
+            <th width=9%>{{"持续时间" | translate}}(H)</th>
+            <th width=4%>{{"地点" | translate}}</th>
+            <th width=15%>{{"系统名称" | translate}}</th>
+            <th width=5%>{{"群组" | translate}}</th>
+            <th width=30%>{{"内容" | translate}}</th>
+            <th width=9%>{{"状态" | translate}}</th>
             <th style="width:5%;border-radius: 0 6px 0 0;">Level</th>
           </tr>
         </thead>
@@ -129,7 +129,7 @@
             </tr>
             <div style="padding: 20px,50px;" class="logo" [ngClass]="{'showlogo': item.status}">
               <ul>
-                <li style="list-style: none;" *ngFor="let item of logo">{{item.name}}&nbsp;{{item.value}} <img
+                <li style="list-style: none;" *ngFor="let item of logo">{{item.name | translate}}&nbsp;{{item.value | translate}} <img
                     *ngIf="item.image=='assets/images/copy.svg'" src={{item.image}}></li>
                 <hr *ngIf="item.name=='報警系統:'">
               </ul>
@@ -147,7 +147,7 @@
                     {{username}}</div>
                   <ng-container *ngFor="let item of logor">
                     <li style="list-style: none;" *ngIf="item.value!=null && item.value!=''">
-                      {{item.name}}&nbsp;{{item.value}}</li>
+                      {{item.name | translate}}&nbsp;{{item.value}}</li>
                   </ng-container>
                 </ul>
               </div>

@@ -41,7 +41,7 @@ export class AppComponent {
     private configservice: DataSourceService,
     public translateService: TranslateService,
     private http2: HttpClient
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.changeLanguage('zh')
@@ -59,7 +59,7 @@ export class AppComponent {
       this.plantList.push(e["data"])
       this.plantStr['str'] = this.plantList.join("','");
     })
-     this.levelN.forEach(element => {
+    this.levelN.forEach(element => {
       element['status'] = true
     });
     this.showLeftList(this.plant[0], this.plantList, this.plant, this.plantStr);
@@ -267,11 +267,11 @@ export class AppComponent {
     this.showRightList()
 
     this.temproary = await this.http.post('', '')
-    // this.system = 
+    // this.system =
     this.temproary.data.forEach(element => {
-      for(let elem of this.listR){
-        if(element.eventId == elem.eventId && element.plant == item.plant){
-          elem.system=element.eventName
+      for (let elem of this.listR) {
+        if (element.eventId == elem.eventId && element.plant == item.plant) {
+          elem.system = element.eventName
         }
       }
       // return element.eventId == this.listR[0].eventId && element.plant == item.plant
@@ -279,14 +279,14 @@ export class AppComponent {
     // this.system = this.system[0].eventName;
     // this.system = this.system.replace(new RegExp(".*_"), "")
 
-    
+
   }
 
-  changeLanguage(data) {
-    //     this.translateService.addLangs(["zh", "en"]);
-        this.translateService.setDefaultLang('zh');
-    //     const browserLang = this.translateService.getBrowserLang();
-    //     this.translateService.use(browserLang.match(/zh|en/) ? browserLang : data);
+  changeLanguage(data) {
+    //this.translateService.addLangs(["zh","en"]);
+    this.translateService.setDefaultLang('zh');
+    //const browserLang = this.translateService.getBrowserLang();
+    //this.translateService.use(browserLang.match(/zh|en/)?browserLang:data);
     console.log(data);
     this.translateService.use(data)
   }

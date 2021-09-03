@@ -28,9 +28,9 @@ export function configureProvider(loader: DataSourceService): () => Promise<void
   };
 }
 
-export function HttpLoaderFactory(httpClient: HttpClient) {
-    return new TranslateHttpLoader(httpClient);
-  } 
+export function HttpLoaderFactory(httpClient: HttpClient){
+  return new TranslateHttpLoader(httpClient);
+}
 
 // export function createTranslateLoader(http: HttpClient) {
 //   return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
@@ -52,9 +52,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     NgxLoadingModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: (HttpLoaderFactory),
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: (HttpLoaderFactory),
+        deps: [HttpClient]
       }
     })],
   providers: [

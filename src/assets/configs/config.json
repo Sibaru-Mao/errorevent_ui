@@ -49,17 +49,17 @@
       {"status":true,"name": "Pending" ,"data":"4","logo":"assets/images/grey.png"}
     ],
     "logo":[
-      {"en_name":"UID","name":"事件編號:","image":"assets/images/copy.svg","value":null},
-      {"en_name":"Type","name":"報警類型:"},
-      {"en_name":"Location","name":"事件地點:"},
-      {"en_name":"Event Time","name":"發生時間:"},
-      {"en_name":"Processing Time","name":"處理時間:"},
-      {"en_name":"End Time","name":"解除時間:"},
-      {"en_name":"Closed Time","name":"結案時間:"},
-      {"en_name":"PIC","name":"PIC:"},
-      {"en_name":"Manage","name":"主管:"},
-      {"en_name":"Manager Phone","name":"主管電話:"},
-      {"en_name":"System","name":"報警系統:"}
+      {"name":"事件編號:","image":"assets/images/copy.svg","value":null},
+      {"name":"報警類型:"},
+      {"name":"事件地點:"},
+      {"name":"發生時間:"},
+      {"name":"處理時間:"},
+      {"name":"解除時間:"},
+      {"name":"結案時間:"},
+      {"name":"PIC:"},
+      {"name":"主管:"},
+      {"name":"主管電話:"},
+      {"name":"報警系統:"}
     ],
     "logor":[
       {"name":"回復日期:"},
