@@ -55,7 +55,7 @@ export class AppComponent {
     this.logor = this.config.menu.logor
 
     this.plant.forEach(e => {
-      e['status'] = true
+      e['status'] = false
       this.plantList.push(e["data"])
       this.plantStr['str'] = this.plantList.join("','");
     })
@@ -66,14 +66,11 @@ export class AppComponent {
     console.log(await this.load(), 11111);
   }
 
-
   refresh(list) {
     list.forEach((e, i) => {
       e['id'] = i + 1;
       e['status'] = false
     });
-
-
   }
 
   async showLeftList(value, list, item, str) {
@@ -103,33 +100,26 @@ export class AppComponent {
     this.array = {}
   }
 
-  // async showChangeLevel(value){
-  //   this.change(value,this.levelList,this.levelN,this.levelStr)
-  //   this.array = await this.http.get('sortByEvents/eventstatus?pic='+this.pic+'&plant='+this.plantStr['str']+'&status='+this.statusStr['str']+'&level='+this.levelStr['str'])
-  //   this.showRightList()
-  // }
-
-  // async showChangeStatus(value){
-  //   this.change(value,this.statusList,this.statusN,this.statusStr)
-  //   this.array = await this.http.get('sortByEvents/eventstatus?pic='+this.pic+'&plant='+this.plantStr['str']+'&status='+this.statusStr['str']+'&level='+this.levelStr['str'])
-  //   this.showRightList()
-  // }
-
   change(value, list, item, str) {
     if (value.name === 'ALL') {
       list.splice(0)
-      item.forEach(e => {
-        e['status'] = true
-        if (e["data"] != '') {
-          list.push(e["data"])
-        }
-
-      })
+      if (item[0]['status'] == false) {
+        item.forEach(e => {
+          e['status'] = true
+          if (e["data"] != '') {
+            list.push(e["data"])
+          }
+        })
+      }else{
+        item.forEach(e => {
+          e['status'] = false
+        });
+      }
     } else {
       let result = item.filter(e => {
         return e['status'] == true
       })
-      if (result['length'] > 2 || value.status == false) {
+      // if (result['length'] > 2 || value.status == false) {
         value.status = !value.status
         if (value.status != true) {
           list.forEach((e, i) => {
@@ -140,7 +130,7 @@ export class AppComponent {
         } else {
           list.push(value.data)
         }
-      }
+      // }
     }
     str['str'] = list.join("','");
 
@@ -274,20 +264,11 @@ export class AppComponent {
           elem.system = element.eventName
         }
       }
-      // return element.eventId == this.listR[0].eventId && element.plant == item.plant
     });
-    // this.system = this.system[0].eventName;
-    // this.system = this.system.replace(new RegExp(".*_"), "")
-
-
   }
 
   changeLanguage(data) {
-    //this.translateService.addLangs(["zh","en"]);
     this.translateService.setDefaultLang('zh');
-    //const browserLang = this.translateService.getBrowserLang();
-    //this.translateService.use(browserLang.match(/zh|en/)?browserLang:data);
-    console.log(data);
     this.translateService.use(data)
   }
 }
