@@ -165,26 +165,26 @@ export class AppComponent {
       this.loading = true;
       this.array = await this.http.get('sortByEvents/eventtype?type=' + item.eventtime + '&pic=' + this.pic + '&plant=' + item.situation + '&status=' + statusTem + '&level=' + item.level)
       // this.logo = []
-      // this.logo = [
-      //   { "name": "事件編號:", "image": "assets/images/copy.svg", "value": null },
-      //   { "name": "報警類型:" },
-      //   { "name": "事件地點:" },
-      //   { "name": "發生時間:" },
-      //   { "name": "處理時間:" },
-      //   { "name": "解除時間:" },
-      //   { "name": "結案時間:" },
-      //   { "name": "PIC:" },
-      //   { "name": "主管:" },
-      //   { "name": "主管電話:" },
-      //   { "name": "報警系統:" }
-      // ]
-      // this.logor = [
-      //   { "name": "回復日期:" },
-      //   { "name": "處理方法:" },
-      //   { "name": "處理描述:" },
-      //   { "name": "原因分析:" },
-      //   { "name": "原因描述:" }
-      // ]
+      this.logo = [
+        { "name": "事件編號:", "image": "assets/images/copy.svg", "value": null },
+        { "name": "報警類型:" },
+        { "name": "事件地點:" },
+        { "name": "發生時間:" },
+        { "name": "處理時間:" },
+        { "name": "解除時間:" },
+        { "name": "結案時間:" },
+        { "name": "PIC:" },
+        { "name": "主管:" },
+        { "name": "主管電話:" },
+        { "name": "報警系統:" }
+      ]
+      this.logor = [
+        { "name": "回復日期:" },
+        { "name": "處理方法:" },
+        { "name": "處理描述:" },
+        { "name": "原因分析:" },
+        { "name": "原因描述:" }
+      ]
 
       this.loading = false;
       this.logo[0]['value'] = this.array['res'][0]['uId']
